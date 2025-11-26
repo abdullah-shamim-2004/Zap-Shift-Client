@@ -1,22 +1,38 @@
 import React from "react";
 import Logo from "../../../Components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import useAuth from "../../../Hooks/useAuth";
+import { FaUserCircle } from "react-icons/fa";
 // import Logo from "../../../Components/Logo/Logo";
 
 const Navbar = () => {
+  const { user, UserSignOut } = useAuth();
   const links = (
     <>
       <li>
         <NavLink>Service</NavLink>
       </li>
       <li>
+        <NavLink to="/send-parcel">Send Parcel</NavLink>
+      </li>
+      <li>
         <NavLink to="/coverage">coverage</NavLink>
       </li>
+
       <li>
         <NavLink>About Us</NavLink>
       </li>
     </>
   );
+  const handleSignOut = () => {
+    UserSignOut()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -51,8 +67,34 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      {/* User Section */}
+      <div className="navbar-end flex items-center gap-3">
+        {user ? (
+          <div>
+            <ul className="">
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="btn btn-outline text-black btn-primary btn-sm"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to="/auth/login" className="btn btn-outline text-black btn-primary btn-sm">
+            Login
+          </Link>
+        )}
+        <li>
+          <NavLink
+            className="btn btn-outline text-white bg-primary btn-sm"
+            to="/rider"
+          >
+            Be a Rider
+          </NavLink>
+        </li>
       </div>
     </div>
   );
