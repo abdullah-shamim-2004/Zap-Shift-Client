@@ -24,6 +24,12 @@ const Bannar = () => {
     },
     {
       id: 3,
+      img: bannarImg2,
+      description:
+        "Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.",
+    },
+    {
+      id: 4,
       img: bannarImg3,
       description:
         "Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.",

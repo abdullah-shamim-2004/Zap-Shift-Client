@@ -3,10 +3,15 @@ import useAuth from "../../Hooks/useAuth";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useSecure from "../../Hooks/useSecure";
 
 const SendParcel = () => {
   const { user } = useAuth();
+  // This custoom hook contain baseurl and token
+  const axiosSecure = useSecure();
   const serviceCenters = useLoaderData();
+
+  // React form
   const {
     register,
     handleSubmit,
@@ -33,7 +38,7 @@ const SendParcel = () => {
     //find out the curier charge
     const isDocument = data.parcelType === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
-    const parcelWeight = parseFloat(data.parcelWight);
+    const parcelWeight = parseFloat(data.parcelWeight);
 
     let cost = 0;
     if (isDocument) {
@@ -51,6 +56,7 @@ const SendParcel = () => {
       }
     }
     console.log("cost :", cost);
+    data.cost = cost;
     Swal.fire({
       title: "Agree with the cost?",
       text: `You will be charged ${cost} taka!`,
@@ -61,11 +67,16 @@ const SendParcel = () => {
       confirmButtonText: "Yes, conferm it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your parcel comfermed.",
-          icon: "success",
+        // Save the parcel information on the database
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log("After the parcel confermed", res.data);
         });
+
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your parcel comfermed.",
+        //   icon: "success",
+        // });
       }
     });
   };

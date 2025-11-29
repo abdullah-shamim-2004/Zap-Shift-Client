@@ -18,10 +18,21 @@ const Navbar = () => {
       <li>
         <NavLink to="/coverage">coverage</NavLink>
       </li>
-
       <li>
         <NavLink>About Us</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/dashboard/my-parcels
+"
+            >
+              My Parcel
+            </NavLink>
+          </li>
+        </>
+      )}{" "}
     </>
   );
   const handleSignOut = () => {
@@ -83,7 +94,10 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <Link to="/auth/login" className="btn btn-outline text-black btn-primary btn-sm">
+          <Link
+            to="/auth/login"
+            className="btn btn-outline text-black btn-primary btn-sm"
+          >
             Login
           </Link>
         )}

@@ -3,7 +3,7 @@ import { GrMapLocation } from "react-icons/gr";
 
 const HowWorks = () => {
   const [howWorks, setHowWorks] = useState([]);
-  console.log(howWorks);
+  // console.log(howWorks);
 
   useEffect(() => {
     fetch("./HowWorks.json")
