@@ -1,12 +1,13 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
 import { useForm, useWatch } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useSecure from "../../Hooks/useSecure";
 
 const SendParcel = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   // This custoom hook contain baseurl and token
   const axiosSecure = useSecure();
   const serviceCenters = useLoaderData();
@@ -64,12 +65,24 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, conferm it!",
+      confirmButtonText: "conferm and continue payment !",
     }).then((result) => {
       if (result.isConfirmed) {
         // Save the parcel information on the database
         axiosSecure.post("/parcels", data).then((res) => {
           console.log("After the parcel confermed", res.data);
+          if (res.data.insertedId) {
+            navigate("/dashboard/my-parcels")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your Parcel has created. Please pay for continue. ",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+
+          }
+
         });
 
         // Swal.fire({
