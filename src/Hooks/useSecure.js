@@ -8,7 +8,7 @@ const axiosSecure = axios.create({
 });
 const useSecure = () => {
   const { user, UserSignOut } = useAuth();
-  const token = user.accessToken;
+  const token = user?.accessToken;
   const navigate = useNavigate();
 
   // console.log(user.accessToken);

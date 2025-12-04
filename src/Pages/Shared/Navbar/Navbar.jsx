@@ -18,9 +18,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/coverage">coverage</NavLink>
       </li>
-      <li>
-        <NavLink>About Us</NavLink>
-      </li>
+
       {user && (
         <>
           <li>
@@ -32,7 +30,10 @@ const Navbar = () => {
             </NavLink>
           </li>
         </>
-      )}{" "}
+      )}
+      <li>
+        <NavLink>About Us</NavLink>
+      </li>
     </>
   );
   const handleSignOut = () => {
