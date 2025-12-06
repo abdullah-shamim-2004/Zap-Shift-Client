@@ -1,6 +1,6 @@
 import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaHistory } from "react-icons/fa";
+import { FaHistory, FaUser } from "react-icons/fa";
 import { LuBike } from "react-icons/lu";
 import { Link, NavLink, Outlet } from "react-router";
 
@@ -95,7 +95,7 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
-            {/* Aprov Rider */}
+            {/* Approve Riders */}
             <li>
               <NavLink
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -104,7 +104,19 @@ const DashBoardLayout = () => {
 "
               >
                 <LuBike />
-                <span className="is-drawer-close:hidden">Payment History</span>
+                <span className="is-drawer-close:hidden">Approve Riders</span>
+              </NavLink>
+            </li>
+            {/* Users Managment  */}
+            <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Users Managment "
+                to="/dashboard/users-managment 
+"
+              >
+                <FaUser />
+                <span className="is-drawer-close:hidden">Users Managment </span>
               </NavLink>
             </li>
 

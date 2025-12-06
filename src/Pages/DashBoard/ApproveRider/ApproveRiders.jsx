@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useSecure from "../../../Hooks/useSecure";
 
-import { FaUserCheck } from "react-icons/fa";
+import { FaEye, FaUserCheck } from "react-icons/fa";
 import { Link } from "react-router";
 import { IoPersonRemoveSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
@@ -69,7 +69,9 @@ const ApproveRiders = () => {
                 <td>{rider.status}</td>
                 <td>{rider.district}</td>
                 <td className="gap-2 flex">
-                  {" "}
+                  <button className="btn btn-sm btn-outline ">
+                    <FaEye />
+                  </button>
                   {/* Accept btn */}
                   <button
                     onClick={() => {
